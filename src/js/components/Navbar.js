@@ -1,12 +1,31 @@
-import { addClass, addId, div, i, nav, span } from '../builders';
+import { newElement } from '../DOM-builders'
 
-export default function navbar() {
-  const navLeft = addClass(div(), 'navbar-left');
+export default function navbar(...children) {
 
-  const cartIcon = addId(addClass(i(), 'fa', 'fa-shopping-cart'), 'cart-icon');
-  const cartItems = addClass(span(), 'cart-items');
-  const navbarItem = addClass(div(cartIcon, cartItems), 'navbar-item');
-  const navRight = addClass(div(navbarItem), 'navbar-right', 'cart');
+    const cartIcon = newElement('i')
+        .addClass('fa', 'fa-shopping-cart')
+        .setId('cart-icon')
 
-  return addClass(nav(navLeft, navRight), 'navbar');
+    const cartItems = newElement('span')
+        .addClass('cart-items')
+
+    const navbarItem = newElement('div',
+            cartIcon,
+            cartItems
+        )
+        .addClass('navbar-item')
+
+    const navRight = newElement('div',
+            navbarItem
+        )
+        .addClass('navbar-right', 'cart')
+
+    const navLeft = newElement('div')
+        .addClass('navbar-left')
+
+    return newElement('nav', ...children,
+        navLeft,
+        navRight
+    )
+    .addClass('navbar')
 }

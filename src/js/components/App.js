@@ -1,17 +1,13 @@
-import { div, addId } from '../builders';
-import modal from './modal';
-import navbar from './navbar';
-import hero from './hero';
-import menu from './menu';
-import bottom from './bottom';
+import { newElement } from '../DOM-builders'
+import Navbar from './Navbar'
+import Hero from './Hero'
+import Menu from './Menu'
 
-export default function app(store) {
-  const modalEle = modal(store);
-  const navbarEle = navbar();
-  const heroEle = hero();
-  const menuEle = menu(store);
-  const bottomEle = bottom();
-  const appEle = addId(div(modalEle, navbarEle, heroEle, menuEle, bottomEle), 'app-container');
-
-  return appEle;
+export default function App(items = []) {
+    return newElement('div',
+        Navbar(),
+        Hero(),
+        Menu(items)
+    )
+    .setId('App-container')
 }

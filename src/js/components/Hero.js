@@ -1,14 +1,36 @@
-import { addClass, div, img, p, section, text } from '../builders';
+import { newElement } from '../DOM-builders'
 
-export default function hero() {
-  const logo = addClass(img('static/fancybear_white.png'), 'logo');
-  const the = addClass(p(text('The')), 'hero-text-light');
-  const fancyBear = addClass(p(text('Fancy Bear')), 'hero-text-bold');
-  const eateries = addClass(p(text('Eateries')), 'hero-text-light');
+export default function Hero(...children) {
 
-  const container = addClass(div(logo, the, fancyBear, eateries), 'container');
+    const logo = newElement('img')
+        .attr('src', 'static/fancybear_white.png')
+        .addClass('logo')
 
-  const heroContent = addClass(div(container), 'hero-content');
+    const the = newElement('p')
+        .text('The')
+        .addClass('hero-text-light')
 
-  return addClass(section(heroContent), 'hero', 'splash');
+    const fancyBear = newElement('p')
+        .text('Fancy Bear')
+        .addClass('hero-text-bold')
+
+    const eateries = newElement('p')
+        .text('Eateries')
+        .addClass('hero-text-light')
+
+    const container = newElement('div',
+            logo,
+            the,
+            fancyBear,
+            eateries
+        )
+        .addClass('container')
+
+    const heroContent = newElement('div', container)
+        .addClass('hero-content')
+    
+    return newElement('section', ...children,
+        heroContent
+    )
+    .addClass('hero', 'splash')
 }
