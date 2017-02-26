@@ -30,5 +30,5 @@ export default function MenuItem(itemData) {
         mediaContent
     )
     .addClass('media', 'menu-item')
-    .attr('key', itemData.id)
+    .setData({ key: itemData.id })
 }

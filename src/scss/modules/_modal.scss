@@ -24,6 +24,10 @@
         border-radius: 0;
         background-color: #fff;
     }
+    .empty-cart-message {
+        margin: 20px 0;
+        font-size: 24px;
+    }
     .modal-container {
         position: absolute;
         top: 50%;
@@ -76,6 +80,9 @@
     .button {
         background-color: $button-bg-hover;
         color: #fff;
+        font-size: 18px;
+        height: auto;
+        padding: 5px;
         &:hover {
             background-color: lighten($button-bg-hover, 10%);
             color: #fff;

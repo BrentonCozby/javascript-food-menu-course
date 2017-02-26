@@ -11,18 +11,37 @@ Object.prototype.setId = function(id) {
 }
 
 Object.prototype.addClass = function(...names) {
+    if(this.hasOwnProperty('elements')) {
+        return this.elements.forEach(el => {
+            names.forEach(name => el.classList.add(name))
+        })
+    }
     const element = this.cloneNode(true)
     names.forEach(name => element.classList.add(name))
     return element
 }
 
 Object.prototype.removeClass = function(...names) {
+    if(this.hasOwnProperty('elements')) {
+        return this.elements.forEach(el => {
+            names.forEach(name => el.classList.remove(name))
+        })
+    }
     const element = this.cloneNode(true)
     names.forEach(name => element.classList.remove(name))
     return element
 }
 
 Object.prototype.setData = function(dataObj) {
+    if(this.hasOwnProperty('elements')) {
+        return this.elements.forEach(el => {
+            for(let key in dataObj) {
+                if(dataObj.hasOwnProperty(key)) {
+                    el.dataset[key] = dataObj[key]
+                }
+            }
+        })
+    }
     const element = this.cloneNode(true)
     for(let key in dataObj) {
         if(dataObj.hasOwnProperty(key)) {
@@ -33,6 +52,12 @@ Object.prototype.setData = function(dataObj) {
 }
 
 Object.prototype.attr = function(attribute, value) {
+    if(this.hasOwnProperty('elements')) {
+        return this.elements.forEach(el => {
+            if(value === false) el.removeAttribute(attribute)
+            else el.setAttribute(attribute, value)
+        })
+    }
     const element = this.cloneNode(true)
     element.setAttribute(attribute, value)
     return element
